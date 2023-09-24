@@ -50,7 +50,7 @@ try {
     $recentRequest = $checkQuery->get_result()->fetch_assoc();
 
     if ($recentRequest && (time() - strtotime($recentRequest['time'])) < 300) {
-        echo "URL $url fetched on " . $recentRequest['time'] . ", took " . $recentRequest['duration'] . "msec. Element <$element> appeared " . $recentRequest['count'] . " times in the page.";
+        echo "URL $url fetched on " . $recentRequest['time'] . ", took " . $recentRequest['duration'] . "msec. Element $element appeared " . $recentRequest['count'] . " times in the page.";
         echo generate_statistics($connection, $domainId, $domain, $elementId, $element);
         exit;
     }
@@ -88,7 +88,7 @@ try {
     $requestQuery->bind_param('iiidi', $domainId, $urlId, $elementId, $response_time, $count);
     $requestQuery->execute();
 
-    echo "URL $url fetched on " . date("Y-m-d H:i:s") . ", took " . round($response_time) . "msec. Element <$element> appeared $count times in the page.";
+    echo "URL $url fetched on " . date("Y-m-d H:i:s") . ", took " . round($response_time) . "msec. Element $element appeared $count times in the page.";
     echo generate_statistics($connection, $domainId, $domain, $elementId, $element);
 } catch (Exception $e) {
     echo $e->getMessage();

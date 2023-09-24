@@ -27,7 +27,7 @@ function generate_statistics($connection, $domainId, $domain, $elementId, $eleme
     $elementDomainCountResult = $elementDomainCountQuery->get_result();
     $elementDomainCountRow = $elementDomainCountResult->fetch_assoc();
     $totalElementDomainCount = $elementDomainCountRow['total_count'];
-    $statistics .= "There was a total of $totalElementDomainCount $element elements from $domain.<br>";
+    $statistics .= "There was a total of $totalElementDomainCount '$element' elements from $domain.<br>";
 
     // Total count of element from all domains
     $elementTotalCountQuery = $connection->prepare("SELECT SUM(count) as total_count FROM request WHERE element_id = ?");
@@ -36,7 +36,7 @@ function generate_statistics($connection, $domainId, $domain, $elementId, $eleme
     $elementTotalCountResult = $elementTotalCountQuery->get_result();
     $elementTotalCountRow = $elementTotalCountResult->fetch_assoc();
     $totalElementCount = $elementTotalCountRow['total_count'];
-    $statistics .= "Total of $totalElementCount $element elements counted in all requests ever made.<br>";
+    $statistics .= "Total of $totalElementCount '$element' elements counted in all requests ever made.<br>";
 
     return $statistics;
 }
